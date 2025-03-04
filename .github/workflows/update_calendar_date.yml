@@ -1,14 +1,13 @@
 name: Fix Missing Calendar Date
 
 on:
-  push::
+  push:
     branches:
       - main
-  pull_request::
+  pull_request:
     branches:
       - main
-  workflow_dispatch:
-    # Enable manual triggering
+  workflow_dispatch: # Enables manual triggering
 
 jobs:
   fix_calendar_date:
@@ -25,8 +24,10 @@ jobs:
 
     - name: Install Dependencies
       run: pip install pyyaml
+
     - name: Run Calendar Date Fix Script
       run: python .github/scripts/fix_calendar_date.py
+
     - name: Commit and Push Changes
       run: |
         git config --global user.name \"github-actions[bot]\"
