@@ -7,8 +7,10 @@ on:
   pull_request::
     branches:
       - main
+  workflow_dispatch:
+    # Enable manual triggering
 
- jobs:
+jobs:
   fix_calendar_date:
     runs-on: ubuntu-latest
 
