@@ -1,0 +1,34 @@
+name: Fix Missing Calendar Date
+
+on:
+  push::
+    branches:
+      - main
+  pull_request::
+    branches:
+      - main
+
+ jobs:
+  fix_calendar_date:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install Dependencies
+      run: pip install pyyaml
+    - name: Run Calendar Date Fix Script
+      run: python .github/scripts/fix_calendar_date.py
+    - name: Commit and Push Changes
+      run: |
+        git config --global user.name \"github-actions[bot]\"
+        git config --global user.email \"github-actions@github.com\"
+        git add .
+        git commit -m \"Automated fix: Added missing calendar_date\" || echo \"No changes needed \"
+        git push
